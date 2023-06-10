@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
 
 void main() {
@@ -24,22 +25,43 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key, required this.title});
   final String title;
+  final Color violetaClaro = const Color.fromARGB(255, 75, 28, 162);
+  final Color cinza = const Color.fromARGB(255, 230, 230, 230);
+  final Color violetaEscuro = const Color.fromARGB(255, 33, 4, 87);
+  final Color vinho = const Color.fromARGB(255, 79, 66, 111);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 230, 230, 230),
+      backgroundColor: cinza,
       body: const Column(
         children: [
-          Row(
-            children: [
-              CircleAvatar(
-                backgroundImage: AssetImage('asset/Kirio_Hikifune.png'),
-              ),
-              Column(
-                children: [Text('Olá'), Text('Kirio Hikifune!')],
-              )
-            ],
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 55.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: CircleAvatar(
+                    radius: 35.0,
+                    backgroundImage: AssetImage('asset/Kirio_Hikifune.png'),
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  child: Column(
+                    children: [
+                      Text(
+                        'Olá',
+                        style: TextStyle(fontFamily: 'Marker Felt'),
+                      ),
+                      Text('Kirio Hikifune!'),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
           Text('Parabéns! Esse mês você fez'),
           MyCard(),
