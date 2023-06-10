@@ -34,38 +34,40 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: cinza,
-      body: const Column(
+      body: Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 55.0),
+            padding: const EdgeInsets.symmetric(vertical: 55.0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              //mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 15.0),
                   child: CircleAvatar(
                     radius: 35.0,
                     backgroundImage: AssetImage('asset/Kirio_Hikifune.png'),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 15.0),
                   child: Column(
                     children: [
                       Text(
                         'Olá',
-                        style: TextStyle(fontFamily: 'Marker Felt'),
+                        style: TextStyle(
+                            fontFamily: 'Marker Felt', color: violetaClaro),
+                        textAlign: TextAlign.right,
                       ),
-                      Text('Kirio Hikifune!'),
+                      const Text('Kirio Hikifune!'),
                     ],
                   ),
                 )
               ],
             ),
           ),
-          Text('Parabéns! Esse mês você fez'),
-          MyCard(),
-          CardRend(),
+          const Text('Parabéns! Esse mês você fez'),
+          const MyCard(),
+          const CardRend(),
         ],
       ),
       floatingActionButton: ExpandableFab(distance: 120, children: [
