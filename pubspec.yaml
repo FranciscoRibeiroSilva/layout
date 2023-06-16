@@ -80,6 +80,9 @@ flutter:
     - family: Marker Felt
       fonts:
         - asset: asset/marker-felt.ttf
+    - family: Concert One
+      fonts:
+        - asset: asset/concertone-regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

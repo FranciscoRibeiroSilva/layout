@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'dart:math' as math;
 
 void main() {
@@ -54,19 +53,51 @@ class HomePage extends StatelessWidget {
                     children: [
                       Text(
                         'Olá',
+                        textAlign: TextAlign.left,
                         style: TextStyle(
-                            fontFamily: 'Marker Felt', color: violetaClaro),
-                        textAlign: TextAlign.right,
+                          fontFamily: 'Marker Felt',
+                          color: violetaClaro,
+                        ),
                       ),
-                      const Text('Kirio Hikifune!'),
+                      Text(
+                        'Kirio Hikifune!',
+                        style: TextStyle(
+                            fontFamily: 'Marker Felt',
+                            color: violetaEscuro,
+                            fontSize: 40.0),
+                      ),
                     ],
                   ),
                 )
               ],
             ),
           ),
-          const Text('Parabéns! Esse mês você fez'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 30.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  'Parabéns! Esse mês você fez',
+                  style: TextStyle(
+                      fontFamily: 'Marker Felt',
+                      color: violetaClaro,
+                      fontSize: 17.0),
+                ),
+                IconButton(
+                  onPressed: () {},
+                  icon: Icon(
+                    Icons.remove_red_eye,
+                    color: vinho,
+                  ),
+                ),
+              ],
+            ),
+          ),
           const MyCard(),
+          const SizedBox(
+            height: 10,
+          ),
           const CardRend(),
         ],
       ),
@@ -80,7 +111,10 @@ class HomePage extends StatelessWidget {
               ),
               onPressed: () {},
             ),
-            const Text('representantes')
+            Text(
+              'representantes',
+              style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+            )
           ],
         ),
         Column(
@@ -92,7 +126,10 @@ class HomePage extends StatelessWidget {
               ),
               onPressed: () {},
             ),
-            const Text('pedidos')
+            Text(
+              'pedidos',
+              style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+            )
           ],
         ),
         Column(
@@ -104,7 +141,10 @@ class HomePage extends StatelessWidget {
               ),
               onPressed: () {},
             ),
-            const Text('clientes'),
+            Text(
+              'clientes',
+              style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+            ),
           ],
         ),
       ]),
@@ -121,30 +161,77 @@ class MyCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: corCard,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Container(
+        decoration: BoxDecoration(
+            color: corCard,
+            borderRadius: const BorderRadius.all(Radius.circular(15.0)),
+            boxShadow: const [
+              BoxShadow(
+                color: Colors.black54,
+                spreadRadius: 1,
+                blurRadius: 6,
+                offset: Offset(1, 1),
+              ),
+            ]),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                children: [
+                  Icon(
+                    Icons.shop_two,
+                    color: cor1,
+                    size: 35.0,
+                  ),
+                  Text(
+                    'Novos\npedidos',
+                    style: TextStyle(
+                      color: cor3,
+                      fontFamily: 'Marker Felt',
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(
+                    Icons.people,
+                    color: cor1,
+                    size: 35.0,
+                  ),
+                  Text(
+                    'Novos\nclientes',
+                    style: TextStyle(
+                      color: cor3,
+                      fontFamily: 'Marker Felt',
+                    ),
+                  ),
+                ],
+              ),
+              Column(
+                children: [
+                  Icon(
+                    Icons.apartment,
+                    color: cor1,
+                    size: 35.0,
+                  ),
+                  Text(
+                    'Novas\ncidades',
+                    style: TextStyle(
+                      color: cor3,
+                      fontFamily: 'Marker Felt',
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
-      child: const Row(children: [
-        Column(
-          children: [
-            Icon(Icons.shop_two),
-            Text('Novos pedidos'),
-          ],
-        ),
-        Column(
-          children: [
-            Icon(Icons.people),
-            Text('Novos clientes'),
-          ],
-        ),
-        Column(
-          children: [
-            Icon(Icons.apartment),
-            Text('Novas cidades'),
-          ],
-        ),
-      ]),
     );
   }
 }
@@ -153,20 +240,64 @@ class CardRend extends StatelessWidget {
   const CardRend({super.key});
   final Color corCard = const Color.fromARGB(255, 215, 211, 226);
   final Color corText = const Color.fromARGB(255, 33, 4, 87);
+  final Color violetaClaro = const Color.fromARGB(255, 75, 28, 162);
+  final Color cinza = const Color.fromARGB(255, 230, 230, 230);
+  final Color violetaEscuro = const Color.fromARGB(255, 33, 4, 87);
+  final Color vinho = const Color.fromARGB(255, 79, 66, 111);
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(color: corCard),
-      child: Row(
-        children: [
-          Icon(
-            Icons.shop_2,
-            color: corText,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 2.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: corCard,
+          borderRadius: BorderRadius.circular(10.0),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black54,
+              spreadRadius: 1,
+              blurRadius: 6,
+              offset: Offset(1, 1),
+            ),
+          ],
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.shop_2,
+                color: corText,
+                size: 45.0,
+              ),
+              const SizedBox(
+                width: 25,
+              ),
+              Column(
+                children: [
+                  Text(
+                    'R\$ 34.000,00',
+                    style: TextStyle(
+                      color: violetaClaro,
+                      fontFamily: 'Concert One',
+                      fontSize: 30.0,
+                    ),
+                  ),
+                  Text(
+                    'em novos pedidos',
+                    style: TextStyle(
+                      color: violetaEscuro,
+                      fontFamily: 'Marker Felt',
+                      fontSize: 18.0,
+                    ),
+                    textAlign: TextAlign.right,
+                  )
+                ],
+              )
+            ],
           ),
-          const Column(
-            children: [Text('RS 34.000,00'), Text('em novos pedidos')],
-          )
-        ],
+        ),
       ),
     );
   }
