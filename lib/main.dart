@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,18 +17,28 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(title: 'Flutter Demo Home Page'),
+      home: HomePage(),
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key, required this.title});
-  final String title;
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+  int _counter = 0;
   final Color violetaClaro = const Color.fromARGB(255, 75, 28, 162);
   final Color cinza = const Color.fromARGB(255, 230, 230, 230);
   final Color violetaEscuro = const Color.fromARGB(255, 33, 4, 87);
   final Color vinho = const Color.fromARGB(255, 79, 66, 111);
+  void _incrementCounter() {
+    setState(() {
+      _counter++;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -101,53 +112,112 @@ class HomePage extends StatelessWidget {
           const CardRend(),
         ],
       ),
-      floatingActionButton: ExpandableFab(distance: 120, children: [
-        Column(
-          children: [
-            ActionButton(
-              icon: const Icon(
-                Icons.person,
-                color: Colors.white,
+      floatingActionButton: ExpandableFab(
+        distance: 120,
+        children: [
+          Column(
+            children: [
+              ActionButton(
+                icon: const Icon(
+                  Icons.person,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
-            ),
-            Text(
-              'representantes',
-              style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
-            )
-          ],
-        ),
-        Column(
-          children: [
-            ActionButton(
-              icon: const Icon(
-                Icons.add_shopping_cart_rounded,
-                color: Colors.white,
+              Text(
+                'representantes',
+                style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+              )
+            ],
+          ),
+          Column(
+            children: [
+              ActionButton(
+                icon: const Icon(
+                  Icons.add_shopping_cart_rounded,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
-            ),
-            Text(
-              'pedidos',
-              style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
-            )
-          ],
-        ),
-        Column(
-          children: [
-            ActionButton(
-              icon: const Icon(
-                Icons.person_add,
-                color: Colors.white,
+              Text(
+                'pedidos',
+                style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+              )
+            ],
+          ),
+          Column(
+            children: [
+              ActionButton(
+                icon: const Icon(
+                  Icons.person_add,
+                  color: Colors.white,
+                ),
+                onPressed: () {},
               ),
-              onPressed: () {},
+              Text(
+                'clientes',
+                style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+              ),
+            ],
+          ),
+        ],
+      ),
+      bottomNavigationBar: BottomNavyBar(
+          selectedIndex: _currentIndex,
+          showElevation: false,
+          itemCornerRadius: 15,
+          curve: Curves.easeIn,
+          backgroundColor: cinza,
+          onItemSelected: (index) => setState(() => _currentIndex = index),
+          items: [
+            BottomNavyBarItem(
+              textAlign: TextAlign.center,
+              icon: const Icon(
+                Icons.home,
+              ),
+              title: const Text(
+                'home',
+                style: TextStyle(
+                  fontFamily: 'Marker Felt',
+                ),
+              ),
+              activeColor: violetaEscuro,
+              inactiveColor: vinho,
             ),
-            Text(
-              'clientes',
-              style: TextStyle(color: vinho, fontFamily: 'Marker Felt'),
+            BottomNavyBarItem(
+              icon: const Icon(Icons.shop_2),
+              title: const Text(
+                'vendas',
+                style: TextStyle(
+                  fontFamily: 'Marker Felt',
+                ),
+              ),
+              activeColor: violetaEscuro,
+              inactiveColor: vinho,
             ),
-          ],
-        ),
-      ]),
+            BottomNavyBarItem(
+              icon: const Icon(Icons.people),
+              title: const Text(
+                'clientes',
+                style: TextStyle(
+                  fontFamily: 'Marker Felt',
+                ),
+              ),
+              activeColor: violetaEscuro,
+              inactiveColor: vinho,
+            ),
+            BottomNavyBarItem(
+              icon: const Icon(Icons.auto_graph),
+              title: const Text(
+                'estatisticas',
+                style: TextStyle(
+                  fontFamily: 'Marker Felt',
+                ),
+              ),
+              activeColor: violetaEscuro,
+              inactiveColor: vinho,
+            ),
+          ]),
     );
   }
 }
@@ -182,6 +252,14 @@ class MyCard extends StatelessWidget {
             children: [
               Column(
                 children: [
+                  Text(
+                    '12',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: cor2,
+                      fontFamily: 'Concert One',
+                    ),
+                  ),
                   Icon(
                     Icons.shop_two,
                     color: cor1,
@@ -198,6 +276,14 @@ class MyCard extends StatelessWidget {
               ),
               Column(
                 children: [
+                  Text(
+                    '20',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: cor2,
+                      fontFamily: 'Concert One',
+                    ),
+                  ),
                   Icon(
                     Icons.people,
                     color: cor1,
@@ -214,6 +300,14 @@ class MyCard extends StatelessWidget {
               ),
               Column(
                 children: [
+                  Text(
+                    '20',
+                    textAlign: TextAlign.end,
+                    style: TextStyle(
+                      color: cor2,
+                      fontFamily: 'Concert One',
+                    ),
+                  ),
                   Icon(
                     Icons.apartment,
                     color: cor1,
@@ -286,12 +380,12 @@ class CardRend extends StatelessWidget {
                   ),
                   Text(
                     'em novos pedidos',
+                    textAlign: TextAlign.end,
                     style: TextStyle(
                       color: violetaEscuro,
                       fontFamily: 'Marker Felt',
                       fontSize: 18.0,
                     ),
-                    textAlign: TextAlign.right,
                   )
                 ],
               )
