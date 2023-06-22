@@ -1,9 +1,45 @@
 import 'package:flutter/material.dart';
 import 'dart:math' as math;
 import 'package:bottom_navy_bar/bottom_navy_bar.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+
+List<Color> iconColor1 = [
+  const Color.fromARGB(255, 33, 4, 87),
+  const Color.fromARGB(255, 255, 255, 255)
+];
+List<Color> backColor = [
+  const Color.fromARGB(255, 230, 230, 230),
+  const Color.fromARGB(255, 0, 0, 0)
+];
+List<Color> cardsBackColor = [
+  const Color.fromARGB(255, 215, 211, 226),
+  const Color.fromARGB(255, 33, 4, 87),
+];
+List<Color> textColor1 = [
+  const Color.fromARGB(255, 33, 4, 87),
+  const Color.fromARGB(255, 255, 255, 255)
+];
+List<Color> textColor2 = [
+  const Color.fromARGB(255, 75, 28, 162),
+  const Color.fromARGB(255, 215, 211, 226),
+];
+
+List<Icon> iconHidden = [
+  const Icon(
+    Icons.remove_red_eye,
+    color: Color.fromARGB(255, 79, 66, 111),
+  ),
+  const Icon(
+    Icons.visibility_off,
+    color: Color.fromARGB(255, 79, 66, 111),
+  ),
+];
+int hide = 0;
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -43,7 +79,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: cinza,
+      backgroundColor: backColor[hide],
       body: Column(
         children: [
           Padding(
@@ -67,14 +103,14 @@ class _HomePageState extends State<HomePage> {
                         textAlign: TextAlign.left,
                         style: TextStyle(
                           fontFamily: 'Marker Felt',
-                          color: violetaClaro,
+                          color: textColor2[hide],
                         ),
                       ),
                       Text(
                         'Kirio Hikifune!',
                         style: TextStyle(
                             fontFamily: 'Marker Felt',
-                            color: violetaEscuro,
+                            color: textColor1[hide],
                             fontSize: 40.0),
                       ),
                     ],
@@ -83,33 +119,12 @@ class _HomePageState extends State<HomePage> {
               ],
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 30.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  'Parabéns! Esse mês você fez',
-                  style: TextStyle(
-                      fontFamily: 'Marker Felt',
-                      color: violetaClaro,
-                      fontSize: 17.0),
-                ),
-                IconButton(
-                  onPressed: () {},
-                  icon: Icon(
-                    Icons.remove_red_eye,
-                    color: vinho,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          const MyCard(),
+          lineIcon(),
+          MyCard(),
           const SizedBox(
             height: 10,
           ),
-          const CardRend(),
+          CardRend(),
         ],
       ),
       floatingActionButton: ExpandableFab(
@@ -167,7 +182,7 @@ class _HomePageState extends State<HomePage> {
           showElevation: false,
           itemCornerRadius: 15,
           curve: Curves.easeIn,
-          backgroundColor: cinza,
+          backgroundColor: backColor[hide],
           onItemSelected: (index) => setState(() => _currentIndex = index),
           items: [
             BottomNavyBarItem(
@@ -181,7 +196,7 @@ class _HomePageState extends State<HomePage> {
                   fontFamily: 'Marker Felt',
                 ),
               ),
-              activeColor: violetaEscuro,
+              activeColor: iconColor1[hide],
               inactiveColor: vinho,
             ),
             BottomNavyBarItem(
@@ -192,7 +207,7 @@ class _HomePageState extends State<HomePage> {
                   fontFamily: 'Marker Felt',
                 ),
               ),
-              activeColor: violetaEscuro,
+              activeColor: iconColor1[hide],
               inactiveColor: vinho,
             ),
             BottomNavyBarItem(
@@ -203,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                   fontFamily: 'Marker Felt',
                 ),
               ),
-              activeColor: violetaEscuro,
+              activeColor: iconColor1[hide],
               inactiveColor: vinho,
             ),
             BottomNavyBarItem(
@@ -214,7 +229,7 @@ class _HomePageState extends State<HomePage> {
                   fontFamily: 'Marker Felt',
                 ),
               ),
-              activeColor: violetaEscuro,
+              activeColor: iconColor1[hide],
               inactiveColor: vinho,
             ),
           ]),
@@ -222,20 +237,76 @@ class _HomePageState extends State<HomePage> {
   }
 }
 
-class MyCard extends StatelessWidget {
-  const MyCard({super.key});
-  final Color corCard = const Color.fromARGB(255, 215, 211, 226);
-  final Color cor1 = const Color.fromARGB(255, 33, 4, 87);
-  final Color cor2 = const Color.fromARGB(255, 79, 66, 111);
-  final Color cor3 = const Color.fromARGB(255, 75, 28, 162);
+class lineIcon extends StatefulWidget {
+  const lineIcon({super.key});
+
+  @override
+  State<lineIcon> createState() => _lineIconState();
+}
+
+class _lineIconState extends State<lineIcon> {
+  void suit() {
+    setState(() {
+      if (hide == 1) {
+        hide = 0;
+      } else {
+        hide = 1;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Parabéns! Esse mês você fez',
+            style: TextStyle(
+                fontFamily: 'Marker Felt',
+                color: textColor2[hide],
+                fontSize: 17.0),
+          ),
+          IconButton(
+            onPressed: () => suit(),
+            icon: iconHidden[hide],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class MyCard extends StatefulWidget {
+  MyCard({super.key});
+
+  @override
+  State<MyCard> createState() => _MyCardState();
+}
+
+class _MyCardState extends State<MyCard> {
+  void suit() {
+    setState(() {
+      hide;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final Color corCard = const Color.fromARGB(255, 215, 211, 226);
+    final Color cor1 = const Color.fromARGB(255, 33, 4, 87);
+    final Color cor2 = const Color.fromARGB(255, 79, 66, 111);
+    final Color cor3 = const Color.fromARGB(255, 75, 28, 162);
+    List<String> pedidos = ['12', '*'];
+    List<String> clientes = ['20', '*'];
+    List<String> cidades = ['20', '*'];
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 30.0),
       child: Container(
         decoration: BoxDecoration(
-            color: corCard,
+            color: cardsBackColor[hide],
             borderRadius: const BorderRadius.all(Radius.circular(15.0)),
             boxShadow: const [
               BoxShadow(
@@ -253,7 +324,7 @@ class MyCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '12',
+                    pedidos[hide],
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: cor2,
@@ -262,13 +333,13 @@ class MyCard extends StatelessWidget {
                   ),
                   Icon(
                     Icons.shop_two,
-                    color: cor1,
+                    color: iconColor1[hide],
                     size: 35.0,
                   ),
                   Text(
                     'Novos\npedidos',
                     style: TextStyle(
-                      color: cor3,
+                      color: textColor2[hide],
                       fontFamily: 'Marker Felt',
                     ),
                   ),
@@ -277,7 +348,7 @@ class MyCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '20',
+                    clientes[hide],
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: cor2,
@@ -286,13 +357,13 @@ class MyCard extends StatelessWidget {
                   ),
                   Icon(
                     Icons.people,
-                    color: cor1,
+                    color: iconColor1[hide],
                     size: 35.0,
                   ),
                   Text(
                     'Novos\nclientes',
                     style: TextStyle(
-                      color: cor3,
+                      color: textColor2[hide],
                       fontFamily: 'Marker Felt',
                     ),
                   ),
@@ -301,7 +372,7 @@ class MyCard extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    '20',
+                    cidades[hide],
                     textAlign: TextAlign.end,
                     style: TextStyle(
                       color: cor2,
@@ -310,13 +381,13 @@ class MyCard extends StatelessWidget {
                   ),
                   Icon(
                     Icons.apartment,
-                    color: cor1,
+                    color: iconColor1[hide],
                     size: 35.0,
                   ),
                   Text(
                     'Novas\ncidades',
                     style: TextStyle(
-                      color: cor3,
+                      color: textColor2[hide],
                       fontFamily: 'Marker Felt',
                     ),
                   ),
@@ -331,20 +402,21 @@ class MyCard extends StatelessWidget {
 }
 
 class CardRend extends StatelessWidget {
-  const CardRend({super.key});
+  CardRend({super.key});
   final Color corCard = const Color.fromARGB(255, 215, 211, 226);
   final Color corText = const Color.fromARGB(255, 33, 4, 87);
   final Color violetaClaro = const Color.fromARGB(255, 75, 28, 162);
   final Color cinza = const Color.fromARGB(255, 230, 230, 230);
   final Color violetaEscuro = const Color.fromARGB(255, 33, 4, 87);
   final Color vinho = const Color.fromARGB(255, 79, 66, 111);
+  List<String> texts = ['R\$ 34.000,00', 'R\$ _,__'];
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 2.0),
       child: Container(
         decoration: BoxDecoration(
-          color: corCard,
+          color: cardsBackColor[hide],
           borderRadius: BorderRadius.circular(10.0),
           boxShadow: const [
             BoxShadow(
@@ -362,7 +434,7 @@ class CardRend extends StatelessWidget {
             children: [
               Icon(
                 Icons.shop_2,
-                color: corText,
+                color: iconColor1[hide],
                 size: 45.0,
               ),
               const SizedBox(
@@ -371,9 +443,9 @@ class CardRend extends StatelessWidget {
               Column(
                 children: [
                   Text(
-                    'R\$ 34.000,00',
+                    texts[hide],
                     style: TextStyle(
-                      color: violetaClaro,
+                      color: textColor2[hide],
                       fontFamily: 'Concert One',
                       fontSize: 30.0,
                     ),
@@ -382,7 +454,7 @@ class CardRend extends StatelessWidget {
                     'em novos pedidos',
                     textAlign: TextAlign.end,
                     style: TextStyle(
-                      color: violetaEscuro,
+                      color: textColor1[hide],
                       fontFamily: 'Marker Felt',
                       fontSize: 18.0,
                     ),
